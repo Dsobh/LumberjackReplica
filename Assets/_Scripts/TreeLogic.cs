@@ -7,7 +7,7 @@ public class TreeLogic : MonoBehaviour
     
     public static List<Vector3> treeBlocksPositions = new List<Vector3>();
     public static List<GameObject> treeBlocks = new List<GameObject>();
-    private static float distanceBetweenBlocks = 1.5f;
+    private static float distanceBetweenBlocks = 2.0f;
 
     public static void RemoveFirst()
     {
@@ -30,6 +30,11 @@ public class TreeLogic : MonoBehaviour
             return playerPosition == treeBlocksPositions[0];
         }
         return false;
+    }
+
+    public static float GetDistanceBetweenBlocks()
+    {
+        return distanceBetweenBlocks;
     }
 
 }

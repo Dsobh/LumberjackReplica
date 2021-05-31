@@ -7,7 +7,7 @@ public class TreeGenerator : MonoBehaviour
 
     [SerializeField, Tooltip("Prefabs de los bloques posibles que pueden salir en el árbol")]
     private GameObject[] prefabs;
-    private float blockDistance = 1.5f;
+    private float blockDistance = TreeLogic.GetDistanceBetweenBlocks();
     private int treeBlocksNumbers = 8; //Tamaño del árbol en bloques
     private int prevBlock = 0;
 
@@ -17,7 +17,7 @@ public class TreeGenerator : MonoBehaviour
         //El primer bloque solo puede ser el tronco central
         TreeLogic.treeBlocks.Add(Instantiate(prefabs[0], Vector3.zero, prefabs[0].transform.rotation));
         TreeLogic.treeBlocksPositions.Add(IndexToVector(0));
-        float blockPosition = 1.5f;
+        float blockPosition = blockDistance;
         for(int i=1; i<treeBlocksNumbers; i++)
         {
             Vector3 newPos = new Vector3(0, blockPosition, 0);
@@ -26,7 +26,7 @@ public class TreeGenerator : MonoBehaviour
         }
     }
 
-    //TODO: Generar un nuevo bloque
+    //Generar un nuevo bloque
     public void SpawnNewBlock(Vector3 position)
     {
         int blockIndex = Random.Range(0, prefabs.Length);
