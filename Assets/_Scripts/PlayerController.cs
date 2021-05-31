@@ -5,12 +5,14 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
+    //Eventos ==========================================
     public delegate void GameOverDelegate();
     public static event GameOverDelegate OnGameOver;
+    //==================================================
 
     private Transform blocksSpawner;
     private TreeGenerator _treeGenerator;
-    private Vector3 playerPos;
+    private Vector3 playerPos; //Contiene la información de la posición del jugador en el sistema del juego
 
     [Header("Tiempo de juego")]
     [SerializeField, Tooltip("Tiempo base que tarda en acabarse el juego")]
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        playerPos = new Vector3(0,0,1);
         timeToGameOverCounter = timeToGameOver;
         blocksSpawner = GameObject.Find("TreeGenerator").GetComponent<Transform>();
         _treeGenerator = GameObject.Find("TreeGenerator").GetComponent<TreeGenerator>();
@@ -41,40 +44,42 @@ public class PlayerController : MonoBehaviour
             OnGameOver();
         }
 
-        //TODO: Animación de talar después de cada movimiento
-        if(Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            LeftMovement();
+        #if UNITY_STANDALONE_WIN
+            if(Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                LeftMovement();
 
-        }else if(Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            RigthMovement();
-        }
+            }else if(Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                RigthMovement();
+            }
+        #endif
 
     }
 
-    //Método para cambiar la dirección en el eje x del player
+    /// <summary>
+    /// Cambia la posición del jugador
+    /// </summary>
     private void ChangePlayerPosition()
     {
         this.transform.position = new Vector3(this.transform.position.x * -1, 0 , 0);
     }
 
+    /// <summary>
+    /// Comprueba si el juego ha llegado a GameOver
+    /// </summary>
     private void CheckGameOver()
     {
         if(TreeLogic.IsNotValidPosition(playerPos))
         {
             if(OnGameOver != null)
             {
-                OnGameOver();
+                OnGameOver(); //Lanzamos el evento de GameOver
             }
         }
     }
 
-    public float getTimeCounter()
-    {
-        return timeToGameOverCounter;
-    }
-
+    //TODO: Animación de talar hacia la derecha
     public void LeftMovement()
     {
         if(this.transform.position.x > 0)
@@ -85,6 +90,7 @@ public class PlayerController : MonoBehaviour
         PostMovement();
     }
 
+    //TODO: Animación de talar hacia la izquierda
     public void RigthMovement()
     {
         if(this.transform.position.x < 0)
@@ -97,10 +103,28 @@ public class PlayerController : MonoBehaviour
 
     private void PostMovement()
     {
+        Debug.Log("Treeblock: " + TreeLogic.treeBlocksPositions[1] + " Player: " + playerPos);
         CheckGameOver();
         TreeLogic.RemoveFirst();
         _treeGenerator.SpawnNewBlock(blocksSpawner.position);
-        CheckGameOver();
+        //CheckGameOver();
         timeToGameOverCounter += timeExtension;
+    }
+
+    /// <summary>
+    /// Reinicia el contador de tiempo
+    /// </summary>
+    public void RestartTime()
+    {
+        timeToGameOverCounter = timeToGameOver;
+    }
+
+    /// <summary>
+    /// Método get de TimeToGameOverTime
+    /// </summary>
+    /// <returns>TimeToGameOverTime</returns>
+    public float getTimeCounter()
+    {
+        return timeToGameOverCounter;
     }
 }

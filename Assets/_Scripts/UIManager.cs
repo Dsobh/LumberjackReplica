@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
 
-    [SerializeField]
+    [SerializeField, Tooltip("Barra de tiempo")]
     private Slider timeBar;
-    private float startValue = 15f;
+    private float startValue = 15f; //Valor inicial del tiempo
 
     void Start()
     {

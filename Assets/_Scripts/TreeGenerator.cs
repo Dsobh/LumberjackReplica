@@ -8,7 +8,7 @@ public class TreeGenerator : MonoBehaviour
     [SerializeField, Tooltip("Prefabs de los bloques posibles que pueden salir en el árbol")]
     private GameObject[] prefabs;
     private float blockDistance = TreeLogic.GetDistanceBetweenBlocks();
-    private int treeBlocksNumbers = 8; //Tamaño del árbol en bloques
+    private int treeBlocksNumbers = 11; //Tamaño del árbol en bloques
     private int prevBlock = 0;
 
     // Start is called before the first frame update
@@ -38,9 +38,17 @@ public class TreeGenerator : MonoBehaviour
         GameObject newBlock = prefabs[blockIndex];
         TreeLogic.treeBlocks.Add(Instantiate(newBlock, position, newBlock.transform.rotation));
         TreeLogic.treeBlocksPositions.Add(IndexToVector(blockIndex));
+        
     }
 
-    //Mapea la posición del tronco en función de la rama que ha spawneado
+    /// <summary>
+    /// Mapea el index correspondiente al array de prefabs (bloques) con un vector 3 que indica la posición que ocupa
+    /// (100) -> izquierda
+    /// (010) -> centro
+    /// (001) -> derecha 
+    /// </summary>
+    /// <param name="i">Indice del bloque instanciado</param>
+    /// <returns>Vector3 con la posición/dirección del bloque</returns>
     private Vector3 IndexToVector(int i)
     {
         switch (i)
@@ -57,7 +65,11 @@ public class TreeGenerator : MonoBehaviour
         }
     }
 
-    //Generamos un numero aleatorio exceptuando un valor
+    /// <summary>
+    /// Genera un número entero aleatorio exceptuando el valor dado
+    /// </summary>
+    /// <param name="exception">Valor que se omitirá</param>
+    /// <returns>Int generado aleatoriamente </returns>
     private int RandomRangeWithException(int exception)
     {
         while(true)
