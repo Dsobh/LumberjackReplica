@@ -20,6 +20,7 @@ public class TreeGenerator : MonoBehaviour
         float blockPosition = blockDistance;
         for(int i=1; i<treeBlocksNumbers; i++)
         {
+            Debug.Log("Hola buenas");
             Vector3 newPos = new Vector3(0, blockPosition, 0);
             SpawnNewBlock(newPos);
             blockPosition += blockDistance;

@@ -11,10 +11,14 @@ public class GameManager : MonoBehaviour
     private GameObject gameOverPanel;
     [SerializeField, Tooltip("Panel que contiene los botones de control")]
     private GameObject controllersUI;
+
+
+    private int score; //Puntuación de la partida
     
     // Start is called before the first frame update
     void Start()
     {
+        score = 0;
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
@@ -28,10 +32,12 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         PlayerController.OnGameOver += HandleGameOverEvent;
+        PlayerController.OnCut += HandleCutEvent;
     }
 
     void OnDisable() {
         PlayerController.OnGameOver -= HandleGameOverEvent;
+        PlayerController.OnCut -= HandleCutEvent;
     }
 
     /// <summary>
@@ -42,6 +48,13 @@ public class GameManager : MonoBehaviour
         _playerController.enabled = false; //Desactivamos el controlador
         gameOverPanel.SetActive(true);
         controllersUI.SetActive(false);
+        SaveNewScore();
+    }
+
+    void HandleCutEvent()
+    {
+        score += 5;
+        _uiManager.UpdateScore(this.score);
     }
 
     /// <summary>
@@ -49,11 +62,26 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void RestartGame()
     {
-        Scene _scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(_scene.name);
+        TreeLogic.RestartLogic();
+        SceneManager.LoadScene(1);
        /* _playerController.RestartTime();
-        _playerController.enabled = true; //Desactivamos el controlador
+        _playerController.enabled = true;
         gameOverPanel.SetActive(false);
         controllersUI.SetActive(true);*/
+    }
+
+    public void SaveNewScore()
+    {
+        if(PlayerPrefs.GetInt("Score") < score)
+        {
+            PlayerPrefs.SetInt("Score", score);
+        }
+        _uiManager.SetScoreRecord(PlayerPrefs.GetInt("Score"));
+    }
+
+    public void ReturnToMenu()
+    {
+        TreeLogic.RestartLogic();
+        SceneManager.LoadScene(0);
     }
 }

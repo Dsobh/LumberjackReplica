@@ -50,4 +50,11 @@ public class TreeLogic : MonoBehaviour
         return distanceBetweenBlocks;
     }
 
+    public static void RestartLogic()
+    {
+        treeBlocksPositions = new List<Vector3>();
+        treeBlocks = new List<GameObject>();
+        
+    }
+
 }
