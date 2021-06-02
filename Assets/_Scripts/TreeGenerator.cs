@@ -30,13 +30,34 @@ public class TreeGenerator : MonoBehaviour
     //Generar un nuevo bloque
     public void SpawnNewBlock(Vector3 position)
     {
-        int blockIndex = Random.Range(0, prefabs.Length);
+        //Generación aleatoria vieja===================================================================
+        /*int blockIndex = Random.Range(0, prefabs.Length);
         //TODO: Aqui saca los bloques intedambiados pero puede haber bloques repetidos 
         if((prevBlock == 1 && blockIndex == 2) || (prevBlock == 2 && blockIndex == 1)){
             blockIndex = RandomRangeWithException(blockIndex);  
         }
         prevBlock = blockIndex;
         GameObject newBlock = prefabs[blockIndex];
+        TreeLogic.treeBlocks.Add(Instantiate(newBlock, position, newBlock.transform.rotation));
+        TreeLogic.treeBlocksPositions.Add(IndexToVector(blockIndex));*/
+        //============================================================================================
+
+        GameObject newBlock = null;
+        int blockIndex = 0;
+
+        //Comprobamos si el anterior bloque es un central, debemos colocar uno central entre cada rama
+        if(prevBlock != 0)
+        {
+            blockIndex = 0; //Si el anterior no es cero el siguientes sí lo será
+        }else
+        {
+            blockIndex = Random.Range(1, prefabs.Length); //Si el anterior es cero el siguiente sera una rama
+        }
+
+        prevBlock = blockIndex; //Actualizamos el índice del anterior bloque generado
+        
+        //Instanciamos y añadimos la información a las listas
+        newBlock = prefabs[blockIndex];
         TreeLogic.treeBlocks.Add(Instantiate(newBlock, position, newBlock.transform.rotation));
         TreeLogic.treeBlocksPositions.Add(IndexToVector(blockIndex));
         
