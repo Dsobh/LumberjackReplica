@@ -13,12 +13,27 @@ public class TreeLogic : MonoBehaviour
     /// Elimina el primer bloque, es decir, el primero que entró en la cola FIFO
     /// Baja un nivel todos los bloques
     /// </summary>
-    public static void RemoveFirst()
+    public static void RemoveFirst(Vector3 playerPosition)
     {
         //Eliminamos toda la información relativa al primer bloque
+        if(treeBlocksPositions[0] == new Vector3(0,1,0))
+        {
+            if(playerPosition == new Vector3(1,0,0))
+            {
+                treeBlocks[0].GetComponent<Animation>().Play("CentralToRight");
+            }else
+            {
+                treeBlocks[0].GetComponent<Animation>().Play("CentralToLeft");
+            }
+        }else
+        {
+            treeBlocks[0].GetComponent<Animation>().Play();
+        }
+        
+        
         treeBlocksPositions.RemoveAt(0);
-        Destroy(treeBlocks[0]);
         treeBlocks.RemoveAt(0);
+        //Destroy(treeBlocks[0]);
 
         //Bajamos los bloques en función de la distancia que hay entre ellos
         foreach (GameObject block in treeBlocks)
@@ -36,7 +51,10 @@ public class TreeLogic : MonoBehaviour
     {
         if(treeBlocksPositions[1] != Vector3.zero)
         {
-            return playerPosition == treeBlocksPositions[1];
+            if(playerPosition == treeBlocksPositions[0] || playerPosition == treeBlocksPositions[1])
+            {
+                return true;
+            }
         }
         return false;
     }

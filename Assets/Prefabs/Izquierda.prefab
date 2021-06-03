@@ -91,6 +91,8 @@ GameObject:
   m_Component:
   - component: {fileID: 312838661082766980}
   - component: {fileID: 2562889576612095026}
+  - component: {fileID: -8570274249874785551}
+  - component: {fileID: -4397354203707614467}
   m_Layer: 0
   m_Name: Izquierda
   m_TagString: Untagged
@@ -163,3 +165,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &-8570274249874785551
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7976878843796552694}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 0cf74bae9aaf2994885bdc2c81e59224, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 0cf74bae9aaf2994885bdc2c81e59224, type: 2}
+  m_WrapMode: 1
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &-4397354203707614467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7976878843796552694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae6671654f78ce2419c9ac2228fe4291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

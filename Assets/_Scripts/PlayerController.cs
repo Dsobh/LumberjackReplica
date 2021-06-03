@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Me he vuelto a cargar");
         playerPos = new Vector3(0,0,1);
         timeToGameOverCounter = timeToGameOver;
         blocksSpawner = GameObject.Find("TreeGenerator").GetComponent<Transform>();
@@ -108,7 +107,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Treeblock: " + TreeLogic.treeBlocksPositions[1] + " Player: " + playerPos);
         CheckGameOver();
-        TreeLogic.RemoveFirst();
+        TreeLogic.RemoveFirst(playerPos);
         _treeGenerator.SpawnNewBlock(blocksSpawner.position);
         if(OnCut != null)
         {

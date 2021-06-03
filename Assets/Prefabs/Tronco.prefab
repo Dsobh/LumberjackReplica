@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3066373049784696873}
   - component: {fileID: 2556202681639902438}
+  - component: {fileID: -4980159388987428553}
+  - component: {fileID: -8560871720607204414}
   m_Layer: 0
   m_Name: Tronco
   m_TagString: Untagged
@@ -81,3 +83,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &-4980159388987428553
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630503243904528197}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: ebed80f59a08a26448d65e8aae28e39e, type: 2}
+  - {fileID: 7400000, guid: 03864eaa657566a49b0ecb9cebd7cacf, type: 2}
+  m_WrapMode: 1
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &-8560871720607204414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630503243904528197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae6671654f78ce2419c9ac2228fe4291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
