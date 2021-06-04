@@ -84,4 +84,9 @@ public class GameManager : MonoBehaviour
         TreeLogic.RestartLogic();
         SceneManager.LoadScene(0);
     }
+
+    public int GetScore()
+    {
+        return score;
+    }
 }

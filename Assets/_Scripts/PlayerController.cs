@@ -25,12 +25,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Multiplicador de velocidad de tiempo")]
     private int timeMultiplier = 2;
 
+    [SerializeField]
+    private int targetScoreToChangeTime = 500;
+    private int auxScore;
+
     private AudioManager _audioManager;
+    private GameManager _gameManager;
 
 
     void Start()
     {
+        auxScore = targetScoreToChangeTime;
         _audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerPos = new Vector3(0,0,1);
         timeToGameOverCounter = timeToGameOver;
         blocksSpawner = GameObject.Find("TreeGenerator").GetComponent<Transform>();
@@ -118,7 +125,11 @@ public class PlayerController : MonoBehaviour
         {
             OnCut();
         }
-        //CheckGameOver();
+        if(_gameManager.GetScore() >= auxScore)
+        {
+            auxScore += targetScoreToChangeTime;
+            timeMultiplier += 1;
+        }
         timeToGameOverCounter += timeExtension;
     }
 

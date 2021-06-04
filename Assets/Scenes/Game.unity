@@ -363,6 +363,7 @@ MonoBehaviour:
   timeToGameOver: 15
   timeExtension: 0.5
   timeMultiplier: 2
+  targetScoreToChangeTime: 500
 --- !u!4 &258237417
 Transform:
   m_ObjectHideFlags: 0

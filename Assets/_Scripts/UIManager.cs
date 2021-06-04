@@ -51,5 +51,4 @@ public class UIManager : MonoBehaviour
             scoreRecord.SetText(value.ToString());
         }
     }
-
 }
