@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     
     // Start is called before the first frame update
     void Start()
-    {
+    {  
         score = 0;
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();

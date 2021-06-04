@@ -25,9 +25,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Multiplicador de velocidad de tiempo")]
     private int timeMultiplier = 2;
 
+    private AudioManager _audioManager;
+
 
     void Start()
     {
+        _audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         playerPos = new Vector3(0,0,1);
         timeToGameOverCounter = timeToGameOver;
         blocksSpawner = GameObject.Find("TreeGenerator").GetComponent<Transform>();
@@ -76,6 +79,7 @@ public class PlayerController : MonoBehaviour
         {
             if(OnGameOver != null)
             {
+                _audioManager.PlayGameOver();
                 OnGameOver(); //Lanzamos el evento de GameOver
             }
         }
@@ -107,6 +111,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Treeblock: " + TreeLogic.treeBlocksPositions[1] + " Player: " + playerPos);
         CheckGameOver();
+        _audioManager.PlayCut();
         TreeLogic.RemoveFirst(playerPos);
         _treeGenerator.SpawnNewBlock(blocksSpawner.position);
         if(OnCut != null)
