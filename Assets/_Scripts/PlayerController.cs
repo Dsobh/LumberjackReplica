@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
             OnGameOver();
         }
 
-        #if UNITY_STANDALONE_WIN
+        #if UNITY_STANDALONE_WIN || UNITY_WEBGL
             if(Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 LeftMovement();
@@ -70,11 +70,20 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
+    /// Ejecuta la animación de golpear del jugador
+    /// </summary>
+    private void PlayerHit()
+    {
+        this.gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Action");
+    }
+
+    /// <summary>
     /// Cambia la posición del jugador
     /// </summary>
     private void ChangePlayerPosition()
     {
         this.transform.position = new Vector3(this.transform.position.x * -1, 0 , 0);
+        this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = !this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX;
     }
 
     /// <summary>
@@ -101,6 +110,7 @@ public class PlayerController : MonoBehaviour
             playerPos = new Vector3(1,0,0);
         }
         PostMovement();
+        PlayerHit();
     }
 
     //TODO: Animación de talar hacia la izquierda
@@ -112,6 +122,7 @@ public class PlayerController : MonoBehaviour
             playerPos = new Vector3(0,0,1);
         }
         PostMovement();
+        PlayerHit();
     }
 
     private void PostMovement()
